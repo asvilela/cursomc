@@ -2,6 +2,8 @@ package com.asvilela.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -31,6 +34,9 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
+	
+	@OneToMany(mappedBy="id.pedido")
+	private Set<ItemPedido> items = new HashSet<>();
 	
 	public Pedido() {}
 
@@ -81,6 +87,14 @@ public class Pedido implements Serializable {
 	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
+	
+	public Set<ItemPedido> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ItemPedido> items) {
+		this.items = items;
+	}
 
 	@Override
 	public int hashCode() {
@@ -105,8 +119,6 @@ public class Pedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 
 }
