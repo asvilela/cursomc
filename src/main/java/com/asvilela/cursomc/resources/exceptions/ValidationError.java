@@ -10,7 +10,6 @@ public class ValidationError extends StandardError {
 	
 	public ValidationError(Integer status, String msg, Long timesTamp) {
 		super(status, msg, timesTamp);
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<FieldMessage> getErrors() {
@@ -20,7 +19,5 @@ public class ValidationError extends StandardError {
 	public void addError(String fieldName, String message) {
 		errors.add(new FieldMessage(fieldName, message));
 	}
-
-	
 
 }
